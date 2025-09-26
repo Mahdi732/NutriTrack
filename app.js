@@ -10,6 +10,6 @@ app.get("/", (req, res) => {
   res.send("Server is running!");
 });
 
-app.listen(config.server.port, () => {
-  console.log(`Server running on http://localhost:${config.server.port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on http://localhost:${process.env.PORT}`);
 });
