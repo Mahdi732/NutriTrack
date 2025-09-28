@@ -1,20 +1,23 @@
 import express from "express";
 import multer from "multer";
-import { analyseMeal } from "../controllers/mealController";
+import { analyseMeal } from "../controllers/mealController.js";
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "/uplaods")
+    cb(null, "uploads/")
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now + "-" + file.originalname)
+    cb(null, Date.now() + "-" + file.originalname)
   }
 });
 
 const uplaod = multer({ storage: storage })
 
+router.get('/', (req, res) => {
+  res.render('meal');
+})
 router.post('/analyse', uplaod.single("mealImage"), analyseMeal);
 
 export default router;
