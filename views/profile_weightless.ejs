@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Perte de Poids</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Header -->
+    <header class="bg-white shadow">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="text-2xl font-extrabold">🍎 Plan Nutrition</div>
+        <p class="text-sm text-gray-500">Bienvenue, Omar</p>
+      </div>
+      <nav class="flex items-center gap-4">
+        <a href="#" class="text-sm text-gray-600 hover:text-gray-900">Mon profil</a>
+        <a href="#" class="text-sm text-red-500 hover:underline">Se déconnecter</a>
+      </nav>
+    </div>
+  </header>
+
+    <!-- Main -->
+    <main class="flex-1 max-w-4xl mx-auto p-6 space-y-8">
+      <!-- Formulaire Objectif -->
+      <section class="bg-white p-6 rounded shadow">
+        <h2 class="text-xl font-bold mb-4">Profil Perte de Poids</h2>
+        <p class="text-gray-600 mb-4">
+          Renseignez vos informations pour un suivi personnalisé basé sur un
+          <strong>déficit calorique contrôlé</strong> et la
+          <strong>prévention des carences</strong>.
+        </p>
+        <form class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-gray-700 font-medium"
+              >Poids actuel (kg)</label
+            >
+            <input
+              type="number"
+              placeholder="95"
+              class="w-full mt-1 p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium"
+              >Poids cible (kg)</label
+            >
+            <input
+              type="number"
+              placeholder="80"
+              class="w-full mt-1 p-2 border rounded"
+            />
+          </div>
+          <div>
+            <label class="block text-gray-700 font-medium"
+              >Durée (semaines)</label
+            >
+            <input
+              type="number"
+              placeholder="12"
+              class="w-full mt-1 p-2 border rounded"
+            />
+          </div>
+          <div class="md:col-span-3">
+            <button
+              type="submit"
+              class="w-full bg-pink-600 text-white py-2 rounded hover:bg-pink-700"
+            >
+              Enregistrer
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Recommandations -->
+      <section>
+        <h2 class="text-lg font-semibold mb-4">
+          Recommandations Nutritionnelles
+        </h2>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-white border-l-4 border-pink-500 p-4 rounded shadow">
+            <h3 class="font-bold text-pink-600">Déficit calorique</h3>
+            <p class="text-gray-700 text-sm">
+              Maintenez un déficit d’environ 500 kcal/jour pour une perte
+              progressive et durable.
+            </p>
+          </div>
+          <div class="bg-white border-l-4 border-green-500 p-4 rounded shadow">
+            <h3 class="font-bold text-green-600">Prévention carences</h3>
+            <p class="text-gray-700 text-sm">
+              Assurez un apport suffisant en fibres, vitamines et minéraux grâce
+              aux fruits, légumes et céréales complètes.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Suivi Calories -->
+      <section>
+        <h2 class="text-lg font-semibold mb-4">Suivi de mes calories</h2>
+        <div class="overflow-x-auto bg-white rounded shadow">
+          <table class="w-full border-collapse">
+            <thead class="bg-gray-100 text-gray-700">
+              <tr>
+                <th class="px-4 py-2 text-left">Jour</th>
+                <th class="px-4 py-2 text-left">Calories consommées</th>
+                <th class="px-4 py-2 text-left">Objectif</th>
+                <th class="px-4 py-2 text-left">Écart</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="px-4 py-2">Lundi</td>
+                <td class="px-4 py-2">1800</td>
+                <td class="px-4 py-2">2000</td>
+                <td class="px-4 py-2 text-green-600 font-semibold">-200</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Mardi</td>
+                <td class="px-4 py-2">2200</td>
+                <td class="px-4 py-2">2000</td>
+                <td class="px-4 py-2 text-red-600 font-semibold">+200 ⚠️</td>
+              </tr>
+              <tr class="border-t">
+                <td class="px-4 py-2">Mercredi</td>
+                <td class="px-4 py-2">1950</td>
+                <td class="px-4 py-2">2000</td>
+                <td class="px-4 py-2 text-green-600 font-semibold">-50</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Prévention Carences -->
+      <section class="bg-pink-50 border-l-4 border-pink-600 p-4 rounded shadow">
+        <h2 class="text-lg font-bold text-pink-700 mb-2">
+          🛡️ Prévention des Carences
+        </h2>
+        <ul class="list-disc list-inside text-gray-700 text-sm space-y-1">
+          <li>Fruits et légumes variés à chaque repas 🍎🥦</li>
+          <li>Fibres : céréales complètes, légumineuses 🌾</li>
+          <li>Vitamine C et B : agrumes, kiwi, fruits rouges 🍊</li>
+          <li>Minéraux : noix, graines, eau minéralisée 🥜</li>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="p-4 text-center bg-gray-100 text-gray-600">
+      &copy; 2025 Plan Nutrition sur mesure
+    </footer>
+  </body>
+</html>
