@@ -1,52 +1,60 @@
 import fs from "fs";
 import path from "path";
-import { ImageAnalysisChain } from "langchain/chains";
-import { GeminiFlashModel } from "langchain/llms";
-import { PromptTemplate } from "langchain/prompts";
+import { GoogleGenAI } from "@google/genai";
 
 export const analyseMeal = async (req, res) => {
   try {
     const file = req.file;
-    const imagePath = file.path;
-    if (!file) {
-      return res.status(400).send("there's problelem with aploading the file please try again.");
-    }
+    if (!file) return res.status(400).send("No file uploaded");
 
-    console.log(imagePath);
-    const imagebuffer = fs.readFileSync(path.resolve(imagePath));
-
-    const gemini = new GeminiFlashModel({
-      apiKey: process.env.GEMINI_API_KEY,
-      model: "gemeni-flash-1.5"
+    const imageBase64 = fs.readFileSync(path.resolve(file.path), {
+      encoding: "base64",
     });
 
-    const chain = new ImageAnalysisChain({ llm: gemini });
+    const ai = new GoogleGenAI({});
 
-    const prompt = new PromptTemplate({
-      template: `
-        You are a nutrition expert. Analyse the uploaded food image carefully.
-        - Identify each food item in the image.
-        - Estimate the portion size.
-        - Estimate the calories, protiens, sodums and anything else.
-        - Return the result in JSON format with this structure:
-        {{
-          "foods": [
-            {{ "name": "Pizza", "quantity": "1 slice", "calories": 285 }}
-          ],
-          "totalCalories": 285
-        }}
-      `,
-      inputVariables: []
-    });
+    const prompt = `
+      You are a nutrition expert. Analyse the uploaded food image carefully.
+      - Identify each food item in the image.
+      - Estimate the portion size.
+      - Estimate the calories, proteins, sodium, and anything else.
+      - Return the result in JSON format with this structure:
+      {
+        "foods": [
+          { "name": "Pizza", "quantity": "1 slice", "calories": 285 }
+        ],
+        "totalCalories": 285
+          and anything else...
+      }
+    `;
 
-    const analysisResult = await chain.call({
-      image: imagebuffer,
-      prompt: await prompt.format({})
-    });
+    const contents = [
+      {
+        inlineData: {
+        mimeType: file.mimetype,
+        data: imageBase64
+        }
+      },
+      { text: prompt }
+    ];
 
-    console.log("analyse result", analysisResult);
-  }catch (e) {
-    console.error(error);
-    res.status(500).send("Server error while analysing the meal");
+    const response = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: contents
+    })
+
+    console.log("Analysis Result:", response.text);
+
+    const result = JSON.parse(response.text);
+    
+    res.json({
+      image: file.path,
+      analysis: 
+    })
+  } catch (error) {
+    console.error("Error analysing meal:", error);
+    res
+      .status(500)
+      .send(`Server error while analysing the meal: ${error.message}`);
   }
-}
+};
