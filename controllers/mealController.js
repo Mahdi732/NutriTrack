@@ -45,11 +45,11 @@ export const analyseMeal = async (req, res) => {
 
     console.log("Analysis Result:", response.text);
 
-    const result = JSON.parse(response.text);
-    
+    const result = JSON.parse(response.text.replace(/```json|```/g, "").trim());
+
     res.json({
       image: file.path,
-      analysis: 
+      analysis: result
     })
   } catch (error) {
     console.error("Error analysing meal:", error);
