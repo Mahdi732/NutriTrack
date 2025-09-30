@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { fileURLToPath } from "url";
-import auth from "./routes/route.js";
+import auth from "./routes/auth.js";
+import selectprogram from "./routes/select_program.js"
 
 dotenv.config()
 const app = express();
@@ -21,6 +22,8 @@ app.get("/", (req, res) => {
 });
 
 app.use('/auth', auth);
+
+app.use('/selectprogram', selectprogram)
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);
