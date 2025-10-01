@@ -16,9 +16,10 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/image', express.static(path.join(__dirname, 'image')));
 
 app.get("/", (req, res) => {
-  res.send("Server is running!");
+  res.render("index");
 });
 
 app.use('/auth', auth);
