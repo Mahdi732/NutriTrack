@@ -9,15 +9,26 @@
 <body class="bg-gray-100">
 
   <div class="max-w-md mx-auto mt-20 p-6 bg-white shadow-lg rounded-lg">
-    <h2 class="text-2xl font-semibold text-center text-gray-700">uplaod picture</h2>
-    <form action="/meal/analyse" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4 mt-4">
+    <h2 class="text-2xl font-semibold text-center text-gray-700">Upload Picture</h2>
+
+    <form action="/meal" method="POST" enctype="multipart/form-data" class="flex flex-col gap-4 mt-4">
       <input type="file" name="mealImage" accept="image/*" required
              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
       <button type="submit" class="bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition-colors">
         Analyse
       </button>
     </form>
-  </div>
 
+    <% if (data) { %>
+      <div class="mt-6">
+        <h3 class="text-xl font-semibold text-gray-700 mb-2">Uploaded Image:</h3>
+        <img src="<%= imagePath %>" class="w-full rounded-md shadow-md mb-4">
+
+        <h3 class="text-xl font-semibold text-gray-700 mb-2">Analysis Result:</h3>
+        <pre class="bg-gray-100 p-4 rounded-md overflow-x-auto text-sm"><%= JSON.stringify(data, null, 2) %></pre>
+      </div>
+    <% } %>
+
+  </div>
 </body>
 </html>
