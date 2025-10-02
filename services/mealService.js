@@ -15,30 +15,68 @@ export const analyseMealService = async (file, user) => {
     1. Food Analysis:
     - Identify each food item in the image.
     - Estimate the portion size (simple format like "1 slice", "100g", "1 cup").
-    - Estimate the main nutritional values: calories, protein, carbs, fats, sugar, sodium.
-    - Return the analysis in clean JSON format like this:
-    {
-      "foods": [
-        { "name": "Pizza", "quantity": "1 slice", "calories": 285, "protein": 12, "carbs": 36, "fat": 10, "sugar": 3, "sodium": 640 }
-      ],
-      "totals": {
-        "calories": 285,
-        "protein": 12
-      }
-    }
+    - Estimate nutritional values: calories, protein, carbs, fat, sugar, sodium.
 
-    2. Profile Comparison:
+    2. Profile-Based Estimation:
     Compare the meal with the user's profile:
     ${JSON.stringify(user)}
-    - Check if the meal fits the user’s daily goal and health condition.
-    - Detect gaps for user profile (e.g. not enough protein for an athlete, too much sugar for diabetic, too much sodium for hypertensive).
+    - Adjust the calorie and nutrient estimation according to the user’s objective:
+      * Athletes: ensure enough protein, carbs for energy, hydration advice.
+      * Weight loss: highlight excess calories or fat, suggest lighter options.
+      * Weight gain: highlight if protein/calories are insufficient.
+      * Chronic patients: warn about dangerous nutrients (sodium for hypertensive, sugar for diabetics).
+    - Return both the raw estimation and the profile-adjusted evaluation.
 
-    3. Tailored Advice:
-    - If the meal is good: confirm it’s a good choice and explain briefly why.
-    - If not: explain the problem clearly and suggest simple improvements or alternatives (max 2–3 suggestions).
-    - Mark the status as: excellent, good, bad, or dangerous.
+    3. Dynamic Recommendations:
+    - Provide short and simple recommendations.
+    - If the meal is good: confirm why it’s good.
+    - If not: explain what’s wrong and suggest 1–3 improvements.
+    - Status must be one of: excellent, good, bad, dangerous.
 
-    STRICT RULE: Respond ONLY with valid JSON. No explanations, no markdown, no extra text.
+    STRICT RULES:
+    - Respond ONLY with valid JSON. 
+    - NO explanations, NO markdown, NO extra text.
+    - Always follow THIS structure exactly:
+
+    {
+      "foods": [
+        { 
+          "name": "string", 
+          "quantity": "string", 
+          "calories": number, 
+          "protein": number, 
+          "carbs": number, 
+          "fat": number, 
+          "sugar": number, 
+          "sodium": number 
+        }
+      ],
+      "totals": { 
+        "calories": number, 
+        "protein": number, 
+        "carbs": number, 
+        "fat": number, 
+        "sugar": number, 
+        "sodium": number 
+      },
+      "profileComparison": {
+        "adjustedEstimation": {
+          "calories": number,
+          "protein": number,
+          "carbs": number,
+          "fat": number,
+          "sugar": number,
+          "sodium": number
+        },
+        "gaps": ["string", "string"],
+        "fit": true
+      },
+      "advice": { 
+        "status": "excellent | good | bad | dangerous", 
+        "message": "string", 
+        "suggestions": ["string", "string"] 
+      }
+    }
   `;
 
   const contents = [

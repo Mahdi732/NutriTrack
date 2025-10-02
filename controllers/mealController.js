@@ -21,7 +21,9 @@ export const analyseMeal = async (req, res) => {
 
     const result = await analyseMealService(file, user);
 
-    res.render("meal", {
+    console.log(result);
+    
+    res.render("main", {
       imagePath: file.path,
       data: result,
     });
