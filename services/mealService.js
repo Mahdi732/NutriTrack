@@ -37,7 +37,7 @@ export const analyseMealService = async (file, user) => {
     - Respond ONLY with valid JSON. 
     - NO explanations, NO markdown, NO extra text.
     - Always follow THIS structure exactly:
-
+ 
     {
       "foods": [
         { 

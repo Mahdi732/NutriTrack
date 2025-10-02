@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Nutrition - Accueil</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl">🍎</span>
+        <span class="font-bold text-lg">Plan Nutrition</span>
+      </div>
+      <nav class="space-x-6">
+        <a href="/" class="hover:text-blue-600">Accueil</a>
+        <a href="/profile" class="hover:text-blue-600">profile</a>
+        <a href="/meal" class="hover:text-blue-600">Analyse</a>
+        <a href="#" class="hover:text-blue-600">Rapports</a>
+        <a href="/auth/login" class="px-4 py-2 border rounded hover:bg-blue-50">Connexion</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-blue-50">
+    <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h1 class="text-4xl font-bold leading-tight">Plan Nutrition <span class="text-blue-600">sur mesure</span></h1>
+        <p class="mt-4 text-gray-600">Des programmes personnalisés selon votre objectif : perte de poids, prise de masse, athlète ou pathologie chronique.</p>
+        <div class="mt-6 space-x-4">
+          <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700">Commencer maintenant</a>
+          <a href="#" class="bg-white border px-6 py-3 rounded shadow hover:bg-gray-100">En savoir plus</a>
+        </div>
+      </div>
+      <div class="flex justify-center h-[25rem]">
+        <img src="image/healthy.jpg" 
+             alt="Nutrition" class="rounded-lg shadow-lg">
+      </div>
+    </div>
+  </section>
+
+  <!-- Profils -->
+  <section class="max-w-7xl mx-auto px-6 py-16">
+    <h2 class="text-2xl font-bold text-center mb-8">Profils disponibles</h2>
+    <p class="text-center text-gray-600 mb-10">Choisissez le profil qui correspond à vos besoins et objectifs nutritionnels</p>
+    <div class="grid md:grid-cols-4 gap-6">
+      <!-- Profil Patient -->
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <div class="text-4xl mb-4">🩺</div>
+        <h3 class="font-semibold mb-2">Profil Patient Chronique</h3>
+        <p class="text-sm text-gray-600 mb-4">Programmes adaptés pour le gestion des pathologies chroniques comme le diabète, hypertension et maladies cardiovasculaires.</p>
+      </div>
+      <!-- Profil Perte de Poids -->
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <div class="text-4xl mb-4">⚖️</div>
+        <h3 class="font-semibold mb-2">Profil Perte de Poids</h3>
+        <p class="text-sm text-gray-600 mb-4">Plans nutritionnels équilibrés pour atteindre vos objectifs de perte de poids de manière saine et durable.</p>
+      </div>
+      <!-- Profil Masse -->
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <div class="text-4xl mb-4">💪</div>
+        <h3 class="font-semibold mb-2">Profil Prise de Masse</h3>
+        <p class="text-sm text-gray-600 mb-4">Programmes riches en protéines et calories pour développer votre masse musculaire efficacement.</p>
+      </div>
+      <!-- Profil Athlète -->
+      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+        <div class="text-4xl mb-4">🏃</div>
+        <h3 class="font-semibold mb-2">Profil Athlète</h3>
+        <p class="text-sm text-gray-600 mb-4">Nutrition optimisée pour les performances sportives, l’endurance et la récupération rapide.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fonctionnalités -->
+  <section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="text-2xl font-bold text-center mb-8">Fonctionnalités</h2>
+      <div class="grid md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-4xl mb-3">📊</div>
+          <h3 class="font-semibold">Suivi des apports nutritionnels</h3>
+          <p class="text-sm text-gray-600 mt-2">Suivez vos calories, macronutriments et micronutriments en temps réel.</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-3">📸</div>
+          <h3 class="font-semibold">Analyse des repas par image</h3>
+          <p class="text-sm text-gray-600 mt-2">Prenez une photo de votre repas et obtenez une estimation détaillée.</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-3">🎯</div>
+          <h3 class="font-semibold">Recommandations personnalisées</h3>
+          <p class="text-sm text-gray-600 mt-2">Recevez des conseils adaptés à votre profil et vos objectifs.</p>
+        </div>
+        <div>
+          <div class="text-4xl mb-3">📈</div>
+          <h3 class="font-semibold">Rapports et progression</h3>
+          <p class="text-sm text-gray-600 mt-2">Visualisez votre évolution avec des graphiques détaillés.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="bg-blue-900 text-white py-16">
+    <div class="max-w-4xl mx-auto text-center px-6">
+      <h2 class="text-2xl font-bold mb-4">Rejoignez-nous et atteignez vos objectifs nutritionnels dès aujourd'hui !</h2>
+      <p class="mb-6">Commencez votre transformation avec un plan personnalisé adapté à vos besoins</p>
+      <a href="#" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded shadow">Créer un compte</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-white py-10 border-t mt-10">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6">
+      <div>
+        <h3 class="font-bold mb-2">🍎 Plan Nutrition</h3>
+        <p class="text-sm text-gray-600">Votre partenaire pour une nutrition personnalisée et équilibrée.</p>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">Liens rapides</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li><a href="#" class="hover:text-blue-600">Accueil</a></li>
+          <li><a href="#" class="hover:text-blue-600">Profils</a></li>
+          <li><a href="#" class="hover:text-blue-600">Analyse</a></li>
+          <li><a href="#" class="hover:text-blue-600">Rapports</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">Ressources</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li><a href="#" class="hover:text-blue-600">Blog</a></li>
+          <li><a href="#" class="hover:text-blue-600">FAQ</a></li>
+          <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold mb-2">Légal</h3>
+        <ul class="space-y-2 text-sm text-gray-600">
+          <li><a href="#" class="hover:text-blue-600">Confidentialité</a></li>
+          <li><a href="#" class="hover:text-blue-600">Conditions d’utilisation</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text-center text-gray-500 text-sm mt-8">&copy; 2025 Plan Nutrition sur mesure. Tous droits réservés.</div>
+  </footer>
+
+</body>
+</html>
