@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/image', express.static(path.join(__dirname, 'image')));
-app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 app.use('/auth', auth);
 
-app.use('/profile', profile)
+app.use('/profile', profile);
 
 app.use('/meal', mealRouter);
 

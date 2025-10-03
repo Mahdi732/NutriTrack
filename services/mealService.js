@@ -14,67 +14,49 @@ export const analyseMealService = async (file, user) => {
 
     1. Food Analysis:
     - Identify each food item in the image.
-    - Estimate the portion size (simple format like "1 slice", "100g", "1 cup").
+    - Estimate portion sizes.
     - Estimate nutritional values: calories, protein, carbs, fat, sugar, sodium.
 
     2. Profile-Based Estimation:
     Compare the meal with the user's profile:
     ${JSON.stringify(user)}
-    - Adjust the calorie and nutrient estimation according to the user’s objective:
-      * Athletes: ensure enough protein, carbs for energy, hydration advice.
-      * Weight loss: highlight excess calories or fat, suggest lighter options.
-      * Weight gain: highlight if protein/calories are insufficient.
-      * Chronic patients: warn about dangerous nutrients (sodium for hypertensive, sugar for diabetics).
-    - Return both the raw estimation and the profile-adjusted evaluation.
+
+    - IMPORTANT: Separate between what the meal contains (totals) and what the user SHOULD ideally have in ONE MEAL (adjustedEstimation) based on their profile and objective.
+      * Example: if daily protein need is 120g and user eats 3 meals, then adjustedEstimation.protein ≈ 40g.
+      * For weight gain: adjustedEstimation should be higher in protein & calories.
+      * For weight loss: adjustedEstimation should be lower in calories, moderate protein.
+      * For chronic patients: adjustedEstimation must reflect safe ranges (low sodium for hypertensive, low sugar for diabetics).
 
     3. Dynamic Recommendations:
-    - Provide short and simple recommendations.
-    - If the meal is good: confirm why it’s good.
-    - If not: explain what’s wrong and suggest 1–3 improvements.
-    - Status must be one of: excellent, good, bad, dangerous.
+    - Compare totals vs adjustedEstimation.
+    - Point out gaps (too high/too low).
+    - Status: excellent | good | bad | dangerous.
 
     STRICT RULES:
-    - Respond ONLY with valid JSON. 
-    - NO explanations, NO markdown, NO extra text.
-    - Always follow THIS structure exactly:
- 
+    - Respond ONLY with valid JSON, no markdown, no text.
+    - Always follow this structure:
+
     {
-      "foods": [
-        { 
-          "name": "string", 
-          "quantity": "string", 
-          "calories": number, 
-          "protein": number, 
-          "carbs": number, 
-          "fat": number, 
-          "sugar": number, 
-          "sodium": number 
-        }
-      ],
-      "totals": { 
-        "calories": number, 
-        "protein": number, 
-        "carbs": number, 
-        "fat": number, 
-        "sugar": number, 
-        "sodium": number 
-      },
+      "foods": [{
+        item: 'Pancakes ...',
+        estimated_quantity_g: 350,
+        calories: 700,
+        protein: 24,
+        carbs: 105,
+        fat: 28,
+        sugar: 21,
+        sodium: 700
+      },],
+      "totals": {...},
       "profileComparison": {
-        "adjustedEstimation": {
-          "calories": number,
-          "protein": number,
-          "carbs": number,
-          "fat": number,
-          "sugar": number,
-          "sodium": number
-        },
-        "gaps": ["string", "string"],
+        "adjustedEstimation": { "calories": number, "protein": number, "carbs": number, "fat": number, "sugar": number, "sodium": number },
+        "gaps": ["string"],
         "fit": true
       },
-      "advice": { 
-        "status": "excellent | good | bad | dangerous", 
-        "message": "string", 
-        "suggestions": ["string", "string"] 
+      "advice": {
+        "status": "excellent | good | bad | dangerous",
+        "message": "string",
+        "suggestions": ["string", "string"]
       }
     }
   `;
