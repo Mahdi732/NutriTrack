@@ -39,7 +39,8 @@ app.use('/auth', authRouter);
 
 // Protected routes
 app.get("/", requireAuth, (req, res) => {
-  res.render("index");
+  const user = req.session.user;
+  res.render("index", {user});
 }); 
 
 app.use('/profile', requireAuth, profile);

@@ -1,151 +1,158 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plan Nutrition - Accueil</title>
+  <title>Nutrition Plan - Home</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap');
+    .font-serif { font-family: 'Crimson Pro', serif; }
+  </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body class="bg-stone-50 text-stone-900">
 
   <!-- Navbar -->
-  <header class="bg-white shadow-sm">
+  <header class="bg-white border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <span class="text-2xl">🍎</span>
-        <span class="font-bold text-lg">Plan Nutrition</span>
+        <span class="font-serif font-bold text-lg">Nutrition Plan</span>
       </div>
-      <nav class="space-x-6">
-        <a href="/" class="hover:text-blue-600">Accueil</a>
-        <a href="/profile" class="hover:text-blue-600">profile</a>
-        <a href="/meal" class="hover:text-blue-600">Analyse</a>
-        <a href="#" class="hover:text-blue-600">Rapports</a>
-        <a href="/auth/login" class="px-4 py-2 border rounded hover:bg-blue-50">Connexion</a>
+      <nav class="space-x-6 text-sm">
+        <a href="/index" class="text-stone-900 hover:text-stone-600 transition">Home</a>
+        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+        <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+        <% if (user) { %>
+          <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+        <% } else { %>
+          <a href="/auth/login" class="px-4 py-2 border border-stone-300 rounded hover:bg-stone-50 transition">Login</a>
+        <% } %>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="bg-blue-50">
+  <section class="bg-stone-100 border-b border-stone-200">
     <div class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <h1 class="text-4xl font-bold leading-tight">Plan Nutrition <span class="text-blue-600">sur mesure</span></h1>
-        <p class="mt-4 text-gray-600">Des programmes personnalisés selon votre objectif : perte de poids, prise de masse, athlète ou pathologie chronique.</p>
+        <h1 class="text-5xl font-serif font-bold leading-tight">Personalized <span class="text-stone-600">Nutrition Plan</span></h1>
+        <p class="mt-4 text-stone-600 leading-relaxed">Customized programs tailored to your goals: weight loss, muscle gain, athletic performance, or chronic condition management.</p>
         <div class="mt-6 space-x-4">
-          <a href="#" class="bg-blue-600 text-white px-6 py-3 rounded shadow hover:bg-blue-700">Commencer maintenant</a>
-          <a href="#" class="bg-white border px-6 py-3 rounded shadow hover:bg-gray-100">En savoir plus</a>
+          <a href="register.html" class="inline-block bg-stone-900 text-white px-6 py-3 rounded border border-stone-900 hover:bg-stone-800 transition">Get Started Now</a>
+          <a href="#features" class="inline-block bg-white border border-stone-300 px-6 py-3 rounded hover:bg-stone-50 transition">Learn More</a>
         </div>
       </div>
       <div class="flex justify-center h-[25rem]">
-        <img src="image/healthy.jpg" 
-             alt="Nutrition" class="rounded-lg shadow-lg">
+        <img src="/image/healthy.jpg" 
+             alt="Healthy Nutrition" class="rounded border border-stone-200 w-full h-full object-cover">
       </div>
     </div>
   </section>
 
-  <!-- Profils -->
+  <!-- Profiles -->
   <section class="max-w-7xl mx-auto px-6 py-16">
-    <h2 class="text-2xl font-bold text-center mb-8">Profils disponibles</h2>
-    <p class="text-center text-gray-600 mb-10">Choisissez le profil qui correspond à vos besoins et objectifs nutritionnels</p>
+    <h2 class="text-3xl font-serif font-bold text-center mb-4">Available Profiles</h2>
+    <p class="text-center text-stone-600 mb-10 leading-relaxed">Choose the profile that matches your nutritional needs and goals</p>
     <div class="grid md:grid-cols-4 gap-6">
-      <!-- Profil Patient -->
-      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+      <!-- Chronic Patient Profile -->
+      <div class="bg-white p-6 rounded border border-stone-200 hover:border-stone-400 transition">
         <div class="text-4xl mb-4">🩺</div>
-        <h3 class="font-semibold mb-2">Profil Patient Chronique</h3>
-        <p class="text-sm text-gray-600 mb-4">Programmes adaptés pour le gestion des pathologies chroniques comme le diabète, hypertension et maladies cardiovasculaires.</p>
+        <h3 class="font-serif font-semibold text-lg mb-2">Chronic Patient Profile</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">Programs adapted for managing chronic conditions like diabetes, hypertension, and cardiovascular diseases.</p>
       </div>
-      <!-- Profil Perte de Poids -->
-      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+      <!-- Weight Loss Profile -->
+      <div class="bg-white p-6 rounded border border-stone-200 hover:border-stone-400 transition">
         <div class="text-4xl mb-4">⚖️</div>
-        <h3 class="font-semibold mb-2">Profil Perte de Poids</h3>
-        <p class="text-sm text-gray-600 mb-4">Plans nutritionnels équilibrés pour atteindre vos objectifs de perte de poids de manière saine et durable.</p>
+        <h3 class="font-serif font-semibold text-lg mb-2">Weight Loss Profile</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">Balanced nutritional plans to achieve your weight loss goals in a healthy and sustainable way.</p>
       </div>
-      <!-- Profil Masse -->
-      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+      <!-- Muscle Gain Profile -->
+      <div class="bg-white p-6 rounded border border-stone-200 hover:border-stone-400 transition">
         <div class="text-4xl mb-4">💪</div>
-        <h3 class="font-semibold mb-2">Profil Prise de Masse</h3>
-        <p class="text-sm text-gray-600 mb-4">Programmes riches en protéines et calories pour développer votre masse musculaire efficacement.</p>
+        <h3 class="font-serif font-semibold text-lg mb-2">Muscle Gain Profile</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">High-protein and calorie-rich programs to effectively develop your muscle mass.</p>
       </div>
-      <!-- Profil Athlète -->
-      <div class="bg-white p-6 rounded shadow hover:shadow-lg transition">
+      <!-- Athlete Profile -->
+      <div class="bg-white p-6 rounded border border-stone-200 hover:border-stone-400 transition">
         <div class="text-4xl mb-4">🏃</div>
-        <h3 class="font-semibold mb-2">Profil Athlète</h3>
-        <p class="text-sm text-gray-600 mb-4">Nutrition optimisée pour les performances sportives, l’endurance et la récupération rapide.</p>
+        <h3 class="font-serif font-semibold text-lg mb-2">Athlete Profile</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">Optimized nutrition for athletic performance, endurance, and rapid recovery.</p>
       </div>
     </div>
   </section>
 
-  <!-- Fonctionnalités -->
-  <section class="bg-gray-50 py-16">
+  <!-- Features -->
+  <section id="features" class="bg-stone-100 py-16 border-y border-stone-200">
     <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-2xl font-bold text-center mb-8">Fonctionnalités</h2>
+      <h2 class="text-3xl font-serif font-bold text-center mb-8">Features</h2>
       <div class="grid md:grid-cols-4 gap-6 text-center">
-        <div>
+        <div class="bg-white p-6 rounded border border-stone-200">
           <div class="text-4xl mb-3">📊</div>
-          <h3 class="font-semibold">Suivi des apports nutritionnels</h3>
-          <p class="text-sm text-gray-600 mt-2">Suivez vos calories, macronutriments et micronutriments en temps réel.</p>
+          <h3 class="font-serif font-semibold text-lg mb-2">Nutritional Tracking</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">Track your calories, macronutrients, and micronutrients in real-time.</p>
         </div>
-        <div>
+        <div class="bg-white p-6 rounded border border-stone-200">
           <div class="text-4xl mb-3">📸</div>
-          <h3 class="font-semibold">Analyse des repas par image</h3>
-          <p class="text-sm text-gray-600 mt-2">Prenez une photo de votre repas et obtenez une estimation détaillée.</p>
+          <h3 class="font-serif font-semibold text-lg mb-2">Meal Image Analysis</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">Take a photo of your meal and get a detailed nutritional estimate.</p>
         </div>
-        <div>
+        <div class="bg-white p-6 rounded border border-stone-200">
           <div class="text-4xl mb-3">🎯</div>
-          <h3 class="font-semibold">Recommandations personnalisées</h3>
-          <p class="text-sm text-gray-600 mt-2">Recevez des conseils adaptés à votre profil et vos objectifs.</p>
+          <h3 class="font-serif font-semibold text-lg mb-2">Personalized Recommendations</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">Receive advice tailored to your profile and goals.</p>
         </div>
-        <div>
+        <div class="bg-white p-6 rounded border border-stone-200">
           <div class="text-4xl mb-3">📈</div>
-          <h3 class="font-semibold">Rapports et progression</h3>
-          <p class="text-sm text-gray-600 mt-2">Visualisez votre évolution avec des graphiques détaillés.</p>
+          <h3 class="font-serif font-semibold text-lg mb-2">Reports & Progress</h3>
+          <p class="text-sm text-stone-600 leading-relaxed">Visualize your evolution with detailed charts and graphs.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Call to Action -->
-  <section class="bg-blue-900 text-white py-16">
+  <section class="bg-stone-900 text-white py-16">
     <div class="max-w-4xl mx-auto text-center px-6">
-      <h2 class="text-2xl font-bold mb-4">Rejoignez-nous et atteignez vos objectifs nutritionnels dès aujourd'hui !</h2>
-      <p class="mb-6">Commencez votre transformation avec un plan personnalisé adapté à vos besoins</p>
-      <a href="#" class="bg-orange-500 hover:bg-orange-600 px-6 py-3 rounded shadow">Créer un compte</a>
+      <h2 class="text-3xl font-serif font-bold mb-4">Join us and achieve your nutritional goals today!</h2>
+      <p class="mb-6 text-stone-300 leading-relaxed">Start your transformation with a personalized plan tailored to your needs</p>
+      <a href="register.html" class="inline-block bg-stone-600 hover:bg-stone-700 px-6 py-3 rounded border border-stone-600 transition">Create an Account</a>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-white py-10 border-t mt-10">
+  <footer class="bg-white py-10 border-t border-stone-200">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-6">
       <div>
-        <h3 class="font-bold mb-2">🍎 Plan Nutrition</h3>
-        <p class="text-sm text-gray-600">Votre partenaire pour une nutrition personnalisée et équilibrée.</p>
+        <h3 class="font-serif font-bold mb-2 flex items-center gap-2"><span>🍎</span> Nutrition Plan</h3>
+        <p class="text-sm text-stone-600 leading-relaxed">Your partner for personalized and balanced nutrition.</p>
       </div>
       <div>
-        <h3 class="font-semibold mb-2">Liens rapides</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
-          <li><a href="#" class="hover:text-blue-600">Accueil</a></li>
-          <li><a href="#" class="hover:text-blue-600">Profils</a></li>
-          <li><a href="#" class="hover:text-blue-600">Analyse</a></li>
-          <li><a href="#" class="hover:text-blue-600">Rapports</a></li>
+        <h3 class="font-serif font-semibold mb-2">Quick Links</h3>
+        <ul class="space-y-2 text-sm text-stone-600">
+          <li><a href="index.html" class="hover:text-stone-900 transition">Home</a></li>
+          <li><a href="profile.html" class="hover:text-stone-900 transition">Profiles</a></li>
+          <li><a href="#" class="hover:text-stone-900 transition">Analysis</a></li>
+          <li><a href="#" class="hover:text-stone-900 transition">Reports</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="font-semibold mb-2">Ressources</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
-          <li><a href="#" class="hover:text-blue-600">Blog</a></li>
-          <li><a href="#" class="hover:text-blue-600">FAQ</a></li>
-          <li><a href="#" class="hover:text-blue-600">Contact</a></li>
+        <h3 class="font-serif font-semibold mb-2">Resources</h3>
+        <ul class="space-y-2 text-sm text-stone-600">
+          <li><a href="#" class="hover:text-stone-900 transition">Blog</a></li>
+          <li><a href="#" class="hover:text-stone-900 transition">FAQ</a></li>
+          <li><a href="#" class="hover:text-stone-900 transition">Contact</a></li>
         </ul>
       </div>
       <div>
-        <h3 class="font-semibold mb-2">Légal</h3>
-        <ul class="space-y-2 text-sm text-gray-600">
-          <li><a href="#" class="hover:text-blue-600">Confidentialité</a></li>
-          <li><a href="#" class="hover:text-blue-600">Conditions d’utilisation</a></li>
+        <h3 class="font-serif font-semibold mb-2">Legal</h3>
+        <ul class="space-y-2 text-sm text-stone-600">
+          <li><a href="#" class="hover:text-stone-900 transition">Privacy</a></li>
+          <li><a href="#" class="hover:text-stone-900 transition">Terms of Use</a></li>
         </ul>
       </div>
     </div>
-    <div class="text-center text-gray-500 text-sm mt-8">&copy; 2025 Plan Nutrition sur mesure. Tous droits réservés.</div>
+    <div class="text-center text-stone-500 text-sm mt-8">&copy; 2025 Personalized Nutrition Plan. All rights reserved.</div>
   </footer>
 
 </body>
