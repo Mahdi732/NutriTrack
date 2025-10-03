@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rapports Hebdomadaires</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🍎</span>
+          <span class="font-bold text-lg">Plan Nutrition</span>
+        </div>
+        <nav class="space-x-6">
+          <a href="/" class="hover:text-blue-600">Accueil</a>
+          <a href="/profile" class="hover:text-blue-600">profile</a>
+          <a href="/meal" class="hover:text-blue-600">Analyse</a>
+          <a href="/rapport" class="hover:text-blue-600">Rapports</a>
+          <a
+            href="/auth/login"
+            class="px-4 py-2 border rounded hover:bg-blue-50"
+            >Connexion</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+      <!-- Patient Chronique -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-700">
+          Patients Chroniques
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Excès de sel</h3>
+            <p class="text-gray-600">
+              Suivi hebdomadaire de la consommation de sodium.
+            </p>
+            <div
+              class="mt-4 bg-red-200 h-32 rounded flex items-center justify-center text-red-700 font-bold"
+            >
+              Graphique Sel
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Glycémie</h3>
+            <p class="text-gray-600">Écarts glycémiques pour diabétiques.</p>
+            <div
+              class="mt-4 bg-blue-200 h-32 rounded flex items-center justify-center text-blue-700 font-bold"
+            >
+              Graphique Glycémie
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Alertes médicales</h3>
+            <p class="text-gray-600">
+              Repas trop salés ou riches en sucre détectés.
+            </p>
+            <ul class="mt-4 list-disc list-inside text-gray-700">
+              <li>Repas mardi : sel élevé</li>
+              <li>Repas jeudi : sucre élevé</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Athlètes -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-700">Athlètes</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Performance vs Nutrition</h3>
+            <p class="text-gray-600">
+              Courbes de progression nutritionnelle et performance.
+            </p>
+            <div
+              class="mt-4 bg-yellow-200 h-32 rounded flex items-center justify-center text-yellow-700 font-bold"
+            >
+              Graphique
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Pré/Post Entraînement</h3>
+            <p class="text-gray-600">Recommandations adaptées aux séances.</p>
+            <ul class="mt-4 list-disc list-inside text-gray-700">
+              <li>Protéines rapides après entraînement</li>
+              <li>Hydratation recommandée</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Écarts Nutritionnels</h3>
+            <p class="text-gray-600">
+              Trop ou trop peu de macronutriments détectés.
+            </p>
+            <ul class="mt-4 list-disc list-inside text-gray-700">
+              <li>Trop de glucides mercredi</li>
+              <li>Protéines insuffisantes lundi</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Perte / Prise de Poids -->
+      <section class="mb-10">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-700">
+          Perte / Prise de Poids
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Évolution du poids</h3>
+            <p class="text-gray-600">
+              Suivi du poids, IMC et masse musculaire estimée.
+            </p>
+            <div
+              class="mt-4 bg-purple-200 h-32 rounded flex items-center justify-center text-purple-700 font-bold"
+            >
+              Graphique Poids
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Déficit / Surplus</h3>
+            <p class="text-gray-600">
+              Ajustement des repas selon les écarts calorique.
+            </p>
+            <ul class="mt-4 list-disc list-inside text-gray-700">
+              <li>Déficit trop important mardi</li>
+              <li>Surplus jeudi</li>
+            </ul>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow">
+            <h3 class="text-xl font-semibold mb-2">Recommandations</h3>
+            <p class="text-gray-600">
+              Conseils pour équilibrer le plan nutritionnel.
+            </p>
+            <ul class="mt-4 list-disc list-inside text-gray-700">
+              <li>Ajouter plus de fibres</li>
+              <li>Limiter sucres simples</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+      <div class="container mx-auto px-6 text-center">
+        &copy; 2025 Auto Nutrition Pro. Tous droits réservés.
+      </div>
+    </footer>
+  </body>
+</html>

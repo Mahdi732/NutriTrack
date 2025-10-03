@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import auth from "./routes/auth.js";
 import profile from "./routes/profile.js"
 import mealRouter from "./routes/meal.js";
+import rapport from "./routes/rapport.js";
 
 
 dotenv.config();
@@ -29,9 +30,11 @@ app.get("/", (req, res) => {
 
 app.use('/auth', auth);
 
-app.use('/profile', profile)
+app.use('/profile', profile);
 
 app.use('/meal', mealRouter);
+
+app.use('/rapport', rapport);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);
