@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nutrition Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0ea5e9",
+              secondary: "#10b981",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="bg-gray-50 min-h-screen">
+    <header class="bg-white shadow-sm">
+      <div
+        class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <span class="text-2xl">🍎</span>
+          <span class="font-bold text-lg">Plan Nutrition</span>
+        </div>
+        <nav class="space-x-6">
+          <a href="#" class="hover:text-blue-600">Accueil</a>
+          <a href="/selectprogram" class="hover:text-blue-600">Profils</a>
+          <a href="#" class="hover:text-blue-600">Analyse</a>
+          <a href="#" class="hover:text-blue-600">Rapports</a>
+          <a href="#" class="px-4 py-2 border rounded hover:bg-blue-50"
+            >Connexion</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <section
+        class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8"
+      >
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="flex flex-col">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">Food Image</h2>
+            <div
+              class="flex-1 bg-gray-100 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center min-h-[300px] overflow-hidden"
+            >
+              <img
+                src="https://img.freepik.com/vecteurs-premium/icone-attente-element-signe-plat-collection-gestion-du-temps-icone-attente-creative-pour-infographie-modeles-conception-web-plus-encore_676904-2468.jpg"
+                alt="Food"
+                id="analysisImage"
+                class="w-full h-full rounded-lg object-cover"
+              />
+            </div>
+          </div>
+
+          <div class="flex flex-col">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">
+              Upload New Image
+            </h2>
+            <form
+              id="analysisForm"
+              enctype="multipart/form-data"
+              class="flex-1 flex flex-col"
+            >
+              <div class="flex-1 flex flex-col justify-center space-y-4">
+                <div>
+                  <label
+                    for="food-image"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                  >
+                    Select food image
+                  </label>
+                  <input
+                    type="file"
+                    id="food-image"
+                    name="mealImage"
+                    accept="image/*"
+                    required
+                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-3 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-sky-600 file:cursor-pointer cursor-pointer"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  id="analysisButton"
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded flex items-center justify-center"
+                >
+                  Analyze Nutrition
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <div id="analysisData">
+        <!-- dataANalysis -->
+      </div>
+    </main>
+
+    <footer class="bg-white border-t border-gray-200 mt-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-center text-gray-600 text-sm">
+          Nutrition Analysis Tool - Helping you make healthier choices
+        </p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/meal.js"></script>
+  </body>
+</html>
