@@ -16,7 +16,8 @@ const storage = multer.diskStorage({
 const uplaod = multer({ storage: storage })
 
 router.get("/", (req, res) => {
-  res.render("meal");
+  const user = req.session.user;
+  res.render("meal", {user});
 });
 router.post('/', uplaod.single("mealImage"), analyseMeal);
 

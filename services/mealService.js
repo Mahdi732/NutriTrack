@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
 import { GoogleGenAI } from "@google/genai";
+import { insertAnalysisMeal, insertRocomondation } from "../repositories/analysisRepository.js";
 
-export const analyseMealService = async (file, user) => {
+export const analyseMealService = async (file, user, userId) => {
   const imageBase64 = fs.readFileSync(path.resolve(file.path), {
     encoding: "base64",
   });
@@ -78,6 +79,16 @@ export const analyseMealService = async (file, user) => {
 
   let data = response.text.trim();
   data = data.replace(/```json|```/g, "").trim();
-
-  return JSON.parse(data);
+  console.log(data)
+  let parseData = JSON.parse(data);
+  const analysisData = {
+  foods: parseData.foods,
+  totals: parseData.totals,
+  profileComparison: parseData.profileComparison
+  };
+  const analysisJson = JSON.stringify(analysisData);
+  const rocomondationJson = JSON.stringify(parseData.advice);
+  const mealId = await insertAnalysisMeal(userId, analysisJson);
+  await insertRocomondation(userId, rocomondationJson);
+  return parseData;
 };

@@ -19,7 +19,9 @@ export const analyseMeal = async (req, res) => {
       dietaryPreferences: ["high protein", "low sugar", "halal"],
     };
 
-    const result = await analyseMealService(file, user);
+    const userId = req.session.user.id;
+
+    const result = await analyseMealService(file, user, userId);
 
     console.log(result);
 

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Reports - Nutrition Plan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap');
+        .font-serif { font-family: 'Crimson Pro', serif; }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans">
+     Navigation 
+    <nav class="bg-white border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl">🍎</span>
+                    <span class="ml-2 text-xl font-serif font-semibold text-stone-900">Nutrition Plan</span>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <nav class="space-x-6 text-sm">
+                        <a href="/index" class="text-stone-900 hover:text-stone-600 transition">Home</a>
+                        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+                        <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+                        <% if (user) { %>
+                        <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+                        <% } else { %>
+                        <a href="/auth/login" class="px-4 py-2 border border-stone-300 rounded hover:bg-stone-50 transition">Login</a>
+                        <% } %>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="mb-12">
+            <h1 class="text-4xl font-serif font-bold text-stone-900 mb-4">Weekly Reports</h1>
+            <p class="text-lg text-stone-600">Track your progress with detailed nutritional and health metrics</p>
+        </div>
+
+        <div class="bg-white border border-stone-200 rounded-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-2">Report Period</label>
+                    <select class="border border-stone-300 rounded-md px-4 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-400">
+                        <option>Last 7 Days</option>
+                        <option>Last 14 Days</option>
+                        <option>Last 30 Days</option>
+                        <option>Last 3 Months</option>
+                    </select>
+                </div>
+                <button class="bg-stone-900 text-white px-6 py-2 rounded-md hover:bg-stone-800 transition-colors">
+                    Export Report
+                </button>
+            </div>
+        </div>
+
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Medical Monitoring</h2>
+                <p class="text-stone-600 mb-8">Track salt and sugar intake, glycemic variations, and health indicators</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Salt & Sugar Excess</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Salt Intake</span>
+                                    <span class="text-stone-900 font-medium">2.8g / 2.3g daily limit</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-stone-600 h-3 rounded-full" style="width: 122%"></div>
+                                </div>
+                                <p class="text-xs text-stone-500 mt-1">22% over recommended limit</p>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Sugar Intake</span>
+                                    <span class="text-stone-900 font-medium">38g / 50g daily limit</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-stone-400 h-3 rounded-full" style="width: 76%"></div>
+                                </div>
+                                <p class="text-xs text-stone-500 mt-1">Within recommended range</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 pt-6 border-t border-stone-200">
+                            <h4 class="text-sm font-medium text-stone-700 mb-4">7-Day Trend</h4>
+                            <div class="flex items-end justify-between h-32 gap-2">
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 65%"></div>
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 78%"></div>
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 55%"></div>
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 88%"></div>
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 72%"></div>
+                                <div class="flex-1 bg-stone-300 rounded-t" style="height: 68%"></div>
+                                <div class="flex-1 bg-stone-600 rounded-t" style="height: 82%"></div>
+                            </div>
+                            <div class="flex justify-between text-xs text-stone-500 mt-2">
+                                <span>Mon</span>
+                                <span>Tue</span>
+                                <span>Wed</span>
+                                <span>Thu</span>
+                                <span>Fri</span>
+                                <span>Sat</span>
+                                <span>Sun</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Glycemic Variations</h3>
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-3 gap-4 text-center">
+                                <div class="border border-stone-200 rounded-lg p-3">
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">94</p>
+                                    <p class="text-xs text-stone-600 mt-1">Average mg/dL</p>
+                                </div>
+                                <div class="border border-stone-200 rounded-lg p-3">
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">78</p>
+                                    <p class="text-xs text-stone-600 mt-1">Lowest</p>
+                                </div>
+                                <div class="border border-stone-200 rounded-lg p-3">
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">128</p>
+                                    <p class="text-xs text-stone-600 mt-1">Highest</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 pt-6 border-t border-stone-200">
+                            <h4 class="text-sm font-medium text-stone-700 mb-4">Daily Pattern</h4>
+                            <div class="relative h-32">
+                                <svg class="w-full h-full" viewBox="0 0 300 100" preserveAspectRatio="none">
+                                    <polyline
+                                        fill="none"
+                                        stroke="#57534e"
+                                        stroke-width="2"
+                                        points="0,70 50,65 100,45 150,50 200,60 250,55 300,65"
+                                    />
+                                    <polyline
+                                        fill="rgba(87, 83, 78, 0.1)"
+                                        stroke="none"
+                                        points="0,70 50,65 100,45 150,50 200,60 250,55 300,65 300,100 0,100"
+                                    />
+                                </svg>
+                            </div>
+                            <div class="flex justify-between text-xs text-stone-500 mt-2">
+                                <span>6am</span>
+                                <span>10am</span>
+                                <span>2pm</span>
+                                <span>6pm</span>
+                                <span>10pm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Athletic Performance</h2>
+                <p class="text-stone-600 mb-8">Nutritional progression curves correlated with performance metrics</p>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Nutrition vs Performance</h3>
+                        <div class="relative h-48">
+                            <svg class="w-full h-full" viewBox="0 0 300 150" preserveAspectRatio="none">
+                                <polyline
+                                    fill="none"
+                                    stroke="#292524"
+                                    stroke-width="2"
+                                    points="0,120 50,110 100,95 150,85 200,75 250,65 300,55"
+                                />
+                                <polyline
+                                    fill="none"
+                                    stroke="#78716c"
+                                    stroke-width="2"
+                                    stroke-dasharray="5,5"
+                                    points="0,130 50,125 100,110 150,100 200,85 250,75 300,65"
+                                />
+                            </svg>
+                        </div>
+                        <div class="flex items-center justify-center gap-6 mt-4">
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-0.5 bg-stone-900"></div>
+                                <span class="text-xs text-stone-600">Performance</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-4 h-0.5 bg-stone-500 border-dashed"></div>
+                                <span class="text-xs text-stone-600">Nutrition Score</span>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-stone-200">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm text-stone-600">Correlation</p>
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">+87%</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-stone-600">Improvement</p>
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">+23%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Macronutrient Balance</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Protein</span>
+                                    <span class="text-stone-900 font-medium">35%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-stone-900 h-3 rounded-full" style="width: 35%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Carbohydrates</span>
+                                    <span class="text-stone-900 font-medium">45%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-stone-700 h-3 rounded-full" style="width: 45%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Fats</span>
+                                    <span class="text-stone-900 font-medium">20%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-stone-500 h-3 rounded-full" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t border-stone-200">
+                            <h4 class="text-sm font-medium text-stone-700 mb-3">Weekly Training Days</h4>
+                            <div class="flex gap-2">
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-900 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Mon</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-200 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Tue</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-900 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Wed</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-200 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Thu</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-900 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Fri</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-900 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Sat</span>
+                                </div>
+                                <div class="flex-1 text-center">
+                                    <div class="w-full h-12 bg-stone-200 rounded mb-2"></div>
+                                    <span class="text-xs text-stone-600">Sun</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Weight Management</h2>
+                <p class="text-stone-600 mb-8">Track weight evolution, BMI, and estimated muscle mass over time</p>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="border border-stone-200 rounded-lg p-6 text-center">
+                        <p class="text-sm text-stone-600 mb-2">Current Weight</p>
+                        <p class="text-3xl font-serif font-bold text-stone-900">72.5 kg</p>
+                        <p class="text-sm text-stone-500 mt-2">-2.3 kg this month</p>
+                    </div>
+                    <div class="border border-stone-200 rounded-lg p-6 text-center">
+                        <p class="text-sm text-stone-600 mb-2">BMI</p>
+                        <p class="text-3xl font-serif font-bold text-stone-900">23.4</p>
+                        <p class="text-sm text-stone-500 mt-2">Normal range</p>
+                    </div>
+                    <div class="border border-stone-200 rounded-lg p-6 text-center">
+                        <p class="text-sm text-stone-600 mb-2">Muscle Mass</p>
+                        <p class="text-3xl font-serif font-bold text-stone-900">58.2 kg</p>
+                        <p class="text-sm text-stone-500 mt-2">+0.8 kg this month</p>
+                    </div>
+                </div>
+
+                <div class="border border-stone-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-stone-900 mb-6">12-Week Evolution</h3>
+                    <div class="relative h-64">
+                        <svg class="w-full h-full" viewBox="0 0 600 200" preserveAspectRatio="none">
+                            <line x1="0" y1="50" x2="600" y2="50" stroke="#e7e5e4" stroke-width="1"/>
+                            <line x1="0" y1="100" x2="600" y2="100" stroke="#e7e5e4" stroke-width="1"/>
+                            <line x1="0" y1="150" x2="600" y2="150" stroke="#e7e5e4" stroke-width="1"/>
+                            
+                            <polyline
+                                fill="none"
+                                stroke="#292524"
+                                stroke-width="3"
+                                points="0,120 50,118 100,115 150,112 200,110 250,108 300,105 350,103 400,100 450,98 500,95 550,92 600,90"
+                            />
+                            
+                            <polyline
+                                fill="none"
+                                stroke="#78716c"
+                                stroke-width="2"
+                                stroke-dasharray="5,5"
+                                points="0,140 50,140 100,141 150,142 200,143 250,144 300,145 350,146 400,147 450,148 500,149 550,150 600,151"
+                            />
+                            
+                            <circle cx="600" cy="90" r="4" fill="#292524"/>
+                            <circle cx="600" cy="151" r="4" fill="#78716c"/>
+                        </svg>
+                    </div>
+                    <div class="flex items-center justify-center gap-8 mt-6">
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-0.5 bg-stone-900"></div>
+                            <span class="text-sm text-stone-600">Weight (kg)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-6 h-0.5 bg-stone-500" style="border-top: 2px dashed"></div>
+                            <span class="text-sm text-stone-600">Muscle Mass (kg)</span>
+                        </div>
+                    </div>
+                    <div class="flex justify-between text-xs text-stone-500 mt-4">
+                        <span>Week 1</span>
+                        <span>Week 4</span>
+                        <span>Week 8</span>
+                        <span>Week 12</span>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mt-8">
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h4 class="text-sm font-medium text-stone-700 mb-4">Goal Progress</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-stone-600">Target Weight: 70 kg</span>
+                                    <span class="text-stone-900 font-medium">72%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-2">
+                                    <div class="bg-stone-900 h-2 rounded-full" style="width: 72%"></div>
+                                </div>
+                            </div>
+                            <p class="text-xs text-stone-500">2.5 kg remaining • Est. 4 weeks</p>
+                        </div>
+                    </div>
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h4 class="text-sm font-medium text-stone-700 mb-4">Weekly Average</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-stone-600">Calorie Deficit</p>
+                                <p class="text-xl font-serif font-semibold text-stone-900">-450</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-stone-600">Weight Loss</p>
+                                <p class="text-xl font-serif font-semibold text-stone-900">-0.6 kg</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="bg-stone-900 text-white rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold mb-4">Weekly Insights</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">📊</div>
+                        <h3 class="font-semibold mb-2">Consistency Score</h3>
+                        <p class="text-stone-300 text-sm">You logged meals 6 out of 7 days this week. Great job maintaining consistency!</p>
+                    </div>
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-semibold mb-2">Goal Achievement</h3>
+                        <p class="text-stone-300 text-sm">You're on track to reach your target weight in 4 weeks at the current pace.</p>
+                    </div>
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">💡</div>
+                        <h3 class="font-semibold mb-2">Recommendation</h3>
+                        <p class="text-stone-300 text-sm">Consider reducing salt intake by 15% to stay within recommended limits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-stone-200 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <span class="text-2xl">🍎</span>
+                        <span class="ml-2 text-lg font-serif font-semibold text-stone-900">Nutrition Plan</span>
+                    </div>
+                    <p class="text-stone-600 text-sm">Your personalized nutrition tracking and health management platform.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-stone-900 mb-4">Product</h3>
+                    <ul class="space-y-2 text-sm text-stone-600">
+                        <li><a href="#" class="hover:text-stone-900">Features</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Pricing</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Reports</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-stone-900 mb-4">Company</h3>
+                    <ul class="space-y-2 text-sm text-stone-600">
+                        <li><a href="#" class="hover:text-stone-900">About</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Blog</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold text-stone-900 mb-4">Legal</h3>
+                    <ul class="space-y-2 text-sm text-stone-600">
+                        <li><a href="#" class="hover:text-stone-900">Privacy</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Terms</a></li>
+                        <li><a href="#" class="hover:text-stone-900">Security</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-stone-200 mt-8 pt-8 text-center text-sm text-stone-600">
+                <p>&copy; 2025 Nutrition Plan. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

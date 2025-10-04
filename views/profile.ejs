@@ -19,12 +19,15 @@
         <span class="text-2xl">🍎</span>
         <span class="font-serif font-semibold text-lg text-stone-900">Nutrition Plan</span>
       </div>
-      <nav class="flex gap-6 text-sm">
-        <a href="/" class="text-stone-600 hover:text-stone-900 transition-colors">Home</a>
-        <a href="/profile.html" class="text-stone-900 font-medium">Profile</a>
-        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition-colors">Analysis</a>
-        <a href="#" class="text-stone-600 hover:text-stone-900 transition-colors">Reports</a>
-        <a href="/login.html" class="px-4 py-1.5 border border-stone-300 rounded text-stone-700 hover:bg-stone-50 transition-colors">Login</a>
+      <nav class="space-x-6 text-sm">
+        <a href="/index" class="text-stone-900 hover:text-stone-600 transition">Home</a>
+        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+        <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+        <% if (user) { %>
+        <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+        <% } else { %>
+        <a href="/auth/login" class="px-4 py-2 border border-stone-300 rounded hover:bg-stone-50 transition">Login</a>
+        <% } %>
       </nav>
     </div>
   </header>

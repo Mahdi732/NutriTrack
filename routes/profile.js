@@ -2,7 +2,8 @@ import express from "express";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("profile");
+  const user = req.session.user;
+  res.render("profile", {user});
 });
 
 export default router;
