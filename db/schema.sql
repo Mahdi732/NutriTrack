@@ -56,3 +56,31 @@ CREATE TABLE weekly_reports (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_weekly_reports_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+
+
+advice: {
+    status: 'dangerous',
+    message: 'This meal is dangerously high in sugar, which is particularly hazardous for someone with diabetes. While the calorie content is appropriate for your weight gain goal, the macronutrient breakdown, especially the high sugar and carbohydrate load, requires significant adjustment to manage your blood glucose levels safely.',
+    suggestions: [
+      'Significantly reduce the amount of high-sugar fruits like mango and banana in your smoothie and as toppings. Opt for lower-glycemic fruits in moderation.',
+      'Increase protein content by adding unsweetened protein powder, Greek yogurt, or more nuts/seeds to help with satiety and muscle gain.',
+      'Replace some fruit with low-glycemic vegetables (e.g., spinach in smoothie) or healthy fats (e.g., avocado) to lower the overall sugar load and improve nutritional balance.',
+      'Always monitor your blood glucose levels closely, especially after meals containing fruit, to understand its impact.'
+    ],
+    prePostTraining: null,
+    hydration: null,
+    medicalAlerts: [
+      'The sugar content of this meal (85.8g) is extremely high and poses a significant risk for someone with diabetes, potentially leading to hyperglycemia. It far exceeds the recommended sugar intake for a single meal for a diabetic individual.',
+      'The carbohydrate content (140g) is also higher than ideal for a single diabetic meal and could contribute to blood sugar spikes.'
+    ],
+    nextMealAdjustment: 'For your next meal, focus on a balanced plate with lean protein (e.g., chicken, fish, legumes), complex carbohydrates with a lower glycemic index (e.g., whole grains, controlled portions of starchy vegetables), healthy fats (e.g., olive oil, avocado), and plenty of non-starchy vegetables. Ensure portion sizes are adequate for your weight gain goal, but prioritize blood sugar control by choosing low-glycemic options and balancing with protein and fat.'
+  }
