@@ -2,11 +2,14 @@ import fs from "fs";
 import path from "path";
 import { GoogleGenAI } from "@google/genai";
 import { insertAnalysisMeal, insertRocomondation } from "../repositories/analysisRepository.js";
+import { getUserData } from "../repositories/profileRepository.js";
 
-export const analyseMealService = async (file, user, userId) => {
+export const analyseMealService = async (file, userId) => {
   const imageBase64 = fs.readFileSync(path.resolve(file.path), {
     encoding: "base64",
   });
+
+  let user = await getUserData(userId);
 
   const ai = new GoogleGenAI({});
 

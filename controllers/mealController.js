@@ -5,23 +5,9 @@ export const analyseMeal = async (req, res) => {
     const file = req.file;
     if (!file) return res.status(400).send("No file uploaded");
 
-    const user = {
-      name: "Ahmed",
-      age: 24,
-      gender: "male",
-      height: 178,
-      weight: 68,
-      malade: "none",
-      allergies: ["none"],
-      activityLevel: "high",
-      type: "sportive",
-      objective: "gain muscle",
-      dietaryPreferences: ["high protein", "low sugar", "halal"],
-    };
-
     const userId = req.session.user.id;
 
-    const result = await analyseMealService(file, user, userId);
+    const result = await analyseMealService(file, userId);
 
     console.log(result);
 
