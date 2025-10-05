@@ -14,7 +14,7 @@ CREATE TABLE users (
 -- 3. Profiles table
 CREATE TABLE profiles (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT NOT NULL UNIQUE,
     sexe ENUM('male', 'female') NOT NULL,
     taille_cm DECIMAL(5,2) NOT NULL,
     poids_actuel_kg DECIMAL(5,2) NOT NULL,

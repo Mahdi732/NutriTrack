@@ -36,7 +36,7 @@ export const login = async (req, res) => {
     res.redirect("/");
   } catch (error) {
     res.render("auth/login", { error: error.message });
-  }
+  }6739173
 };
 
 export const logout = (req, res) => {

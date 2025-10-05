@@ -19,12 +19,15 @@
         <span class="text-2xl">🍎</span>
         <span class="font-serif font-semibold text-lg text-stone-900">Nutrition Plan</span>
       </div>
-      <nav class="flex gap-6 text-sm">
-        <a href="/" class="text-stone-600 hover:text-stone-900 transition-colors">Home</a>
-        <a href="/profile.html" class="text-stone-900 font-medium">Profile</a>
-        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition-colors">Analysis</a>
-        <a href="#" class="text-stone-600 hover:text-stone-900 transition-colors">Reports</a>
-        <a href="/login.html" class="px-4 py-1.5 border border-stone-300 rounded text-stone-700 hover:bg-stone-50 transition-colors">Login</a>
+      <nav class="space-x-6 text-sm">
+        <a href="/" class="text-stone-900 hover:text-stone-600 transition">Home</a>
+        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+        <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+        <% if (user) { %>
+        <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+        <% } else { %>
+        <a href="/auth/login" class="px-4 py-2 border border-stone-300 rounded hover:bg-stone-50 transition">Login</a>
+        <% } %>
       </nav>
     </div>
   </header>
@@ -46,156 +49,135 @@
           <!-- User Info -->
           <div class="flex-grow">
             <h1 class="font-serif text-3xl font-semibold text-stone-900 mb-1">John Doe</h1>
-            <p class="text-stone-600 text-sm">Member since January 2025</p>
           </div>
-          
-          <!-- Edit Avatar Button -->
-          <button class="px-4 py-2 border border-stone-300 rounded text-sm text-stone-700 hover:bg-stone-50 transition-colors">
-            Change Photo
-          </button>
         </div>
       </div>
 
       <!-- User Profile Form -->
       <form id="profileForm" class="bg-white border border-stone-200 rounded-lg p-8 space-y-6" novalidate>
-        <input type="hidden" name="user_id" value="">
-
-        <h2 class="font-serif text-2xl font-semibold text-stone-900 pb-2 border-b border-stone-200">Profile Information</h2>
+        <h2 class="font-serif text-2xl font-semibold text-stone-900 pb-2 border-b border-stone-200">
+          Profile Information
+        </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Gender -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Gender</label>
-            <select name="sexe" required class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
+            <select name="sexe" required
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
               <option value="">-- Select --</option>
-              <option value="M">Male</option>
-              <option value="F">Female</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
             </select>
-          </div>
-
-          <!-- Date of Birth -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Date of Birth</label>
-            <input type="date" name="date_naissance" required class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
           </div>
 
           <!-- Height -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Height (cm)</label>
-            <input type="number" step="0.01" name="taille_cm" placeholder="175.00" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <input type="number" step="0.01" name="taille_cm" placeholder="175.00"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900"
+              required>
           </div>
 
           <!-- Current Weight -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Current Weight (kg)</label>
-            <input type="number" step="0.01" name="poids_actuel_kg" placeholder="70.50" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <input type="number" step="0.01" name="poids_actuel_kg" placeholder="70.50"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900"
+              required>
           </div>
 
           <!-- Target Weight -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Target Weight (kg)</label>
-            <input type="number" step="0.01" name="poids_cible_kg" placeholder="68.00" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <input type="number" step="0.01" name="poids_cible_kg" placeholder="68.00"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
           </div>
 
           <!-- Activity Level -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Activity Level</label>
-            <select name="niveau_activite" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
+            <select name="niveau_activite"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
               <option value="">-- Select --</option>
-              <option value="Sedentary">Sedentary</option>
-              <option value="Moderate">Moderate</option>
-              <option value="Active">Active</option>
-              <option value="Very Active">Very Active</option>
+              <option value="low">Low</option>
+              <option value="moderate">Moderate</option>
+              <option value="high">High</option>
             </select>
           </div>
 
           <!-- Sport Discipline -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Sport Discipline</label>
-            <select name="sport_discipline" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
-              <option value="None">None</option>
-              <option value="Endurance">Endurance</option>
-              <option value="Strength">Strength</option>
-              <option value="Mixed">Mixed</option>
+            <select name="sport_discipline"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
+              <option value="">None</option>
+              <option value="endurance">Endurance</option>
+              <option value="strength">Strength</option>
+              <option value="mixed">Mixed</option>
             </select>
           </div>
 
-          <!-- Session Frequency -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Sessions per Week</label>
-            <input type="number" name="frequence_seances" placeholder="3" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
-          </div>
-
-          <!-- Session Duration -->
+          <!-- Average Duration -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Average Duration (min)</label>
-            <input type="number" name="duree_moyenne_min" placeholder="45" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <input type="number" name="duree_moyenne_min" placeholder="45"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
           </div>
 
           <!-- Energy Expenditure -->
           <div class="space-y-2 md:col-span-2">
             <label class="block text-sm font-medium text-stone-900">Energy Expenditure (kcal/day)</label>
-            <input type="number" name="depense_energetique" placeholder="2300" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <input type="number" name="depense_energetique" placeholder="2300"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
           </div>
         </div>
 
-        <!-- Nutrition Goals Section -->
+        <!-- Goals Section -->
         <h3 class="font-serif text-xl font-semibold text-stone-900 pt-4 pb-2 border-b border-stone-200">Nutrition Goals</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Goal -->
           <div class="space-y-2">
             <label class="block text-sm font-medium text-stone-900">Goal</label>
-            <select name="objectif" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
+            <select name="objectif"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
               <option value="">-- Select --</option>
-              <option value="Weight Loss">Weight Loss</option>
-              <option value="Muscle Gain">Muscle Gain</option>
-              <option value="Maintenance">Maintenance</option>
-              <option value="Sport Performance">Sport Performance</option>
-              <option value="Medical">Medical</option>
+              <option value="weight_loss">Weight Loss</option>
+              <option value="muscle_gain">Muscle Gain</option>
+              <option value="maintenance">Maintenance</option>
+              <option value="performance">Performance</option>
             </select>
-          </div>
-
-          <!-- Target Calories -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Target Calories (kcal/day)</label>
-            <input type="number" name="calories_cible" placeholder="2000" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
           </div>
 
           <!-- Medical Condition -->
           <div class="space-y-2 md:col-span-2">
-            <label class="block text-sm font-medium text-stone-900">Medical Condition (if applicable)</label>
-            <textarea name="type_pathologie" rows="3" placeholder="e.g., diabetes, hypertension" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900"></textarea>
-          </div>
-
-          <!-- Carbohydrates -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Carbohydrates (%)</label>
-            <input type="number" name="glucides_pct" placeholder="50" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
-          </div>
-
-          <!-- Protein -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Protein (%)</label>
-            <input type="number" name="proteines_pct" placeholder="20" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
-          </div>
-
-          <!-- Fat -->
-          <div class="space-y-2">
-            <label class="block text-sm font-medium text-stone-900">Fat (%)</label>
-            <input type="number" name="lipides_pct" placeholder="30" class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 text-stone-900">
+            <label class="block text-sm font-medium text-stone-900">Medical Condition</label>
+            <select name="type_pathologie"
+              class="w-full px-3 py-2 border border-stone-300 rounded focus:outline-none focus:ring-2 focus:ring-stone-400 bg-white text-stone-900">
+              <option value="none">None</option>
+              <option value="diabetes">Diabetes</option>
+              <option value="hypertension">Hypertension</option>
+              <option value="obesity">Obesity</option>
+            </select>
           </div>
         </div>
-
-        <!-- Validation message -->
-        <p id="macro-msg" class="text-sm text-red-600 hidden">The sum of percentages must equal 100%.</p>
 
         <!-- Buttons -->
         <div class="flex justify-between pt-6 border-t border-stone-200">
-          <button type="submit" class="px-6 py-2 bg-stone-900 text-white rounded hover:bg-stone-800 transition-colors">Save Changes</button>
-          <button type="reset" class="px-6 py-2 border border-stone-300 rounded text-stone-700 hover:bg-stone-50 transition-colors">Reset</button>
+          <button type="submit"
+            id="profile-form-button"
+            class="px-6 py-2 bg-stone-900 text-white rounded hover:bg-stone-800 transition-colors">
+            Save Changes
+          </button>
+          <button type="reset"
+            class="px-6 py-2 border border-stone-300 rounded text-stone-700 hover:bg-stone-50 transition-colors">
+            Reset
+          </button>
         </div>
       </form>
+      <div id="responseDiv" role="alert"></div>
+    </div>
     </div>
   </main>
 
@@ -210,25 +192,7 @@
     </div>
   </footer>
 
-  <script>
-    // Macro validation
-    const form = document.getElementById('profileForm');
-    const macroMsg = document.getElementById('macro-msg');
-    
-    form.addEventListener('submit', function(e) {
-      const carbs = parseFloat(document.querySelector('[name="glucides_pct"]').value) || 0;
-      const protein = parseFloat(document.querySelector('[name="proteines_pct"]').value) || 0;
-      const fat = parseFloat(document.querySelector('[name="lipides_pct"]').value) || 0;
-      
-      const total = carbs + protein + fat;
-      
-      if (total !== 100 && total !== 0) {
-        e.preventDefault();
-        macroMsg.classList.remove('hidden');
-      } else {
-        macroMsg.classList.add('hidden');
-      }
-    });
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="/profile.public.js"></script>
 </body>
 </html>

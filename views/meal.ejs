@@ -29,11 +29,15 @@
                     <h1 class="text-4xl font-serif font-bold text-stone-900">Nutrition Analysis</h1>
                     <p class="text-stone-600 mt-2">Detailed breakdown of your meal</p>
                 </div>
-                <nav class="space-x-6">
-                    <a href="#" class="text-stone-600 hover:text-stone-900">Home</a>
-                    <a href="#" class="text-stone-600 hover:text-stone-900">Profiles</a>
-                    <a href="#" class="text-stone-600 hover:text-stone-900">Analysis</a>
-                    <a href="#" class="text-stone-600 hover:text-stone-900">Reports</a>
+                <nav class="space-x-6 text-sm">
+                    <a href="/" class="text-stone-900 hover:text-stone-600 transition">Home</a>
+                    <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+                    <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+                    <% if (user) { %>
+                    <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+                    <% } else { %>
+                    <a href="/auth/login" class="px-4 py-2 border border-stone-300 rounded hover:bg-stone-50 transition">Login</a>
+                    <% } %>
                 </nav>
             </div>
         </div>
