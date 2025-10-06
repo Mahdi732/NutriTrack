@@ -7,6 +7,7 @@ import profile from "./routes/profile.js"
 import mealRouter from "./routes/meal.js";
 import authRouter from "./routes/auth.js";
 import rapportRouter from "./routes/rapport.js";
+import performanceRouter from "./routes/performance.js";
 import { requireAuth } from "./middleware/auth.js";
 
 
@@ -49,6 +50,8 @@ app.use('/profile', requireAuth, profile);
 app.use('/meal', requireAuth, mealRouter);
 
 app.use('/rapport', requireAuth, rapportRouter);
+
+app.use('/performance', requireAuth, performanceRouter);
 
 app.listen(process.env.PORT, () => {
   console.log(`Server running on http://localhost:${process.env.PORT}`);

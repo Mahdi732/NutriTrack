@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Athlete Performance - NutriTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&display=swap');
+        .font-serif { font-family: 'Crimson Pro', serif; }
+    </style>
+</head>
+<body class="bg-stone-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-stone-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl">🍎</span>
+                    <span class="ml-2 text-xl font-serif font-semibold text-stone-900">NutriTrack</span>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <nav class="space-x-6 text-sm">
+                        <a href="/index" class="text-stone-600 hover:text-stone-900 transition">Home</a>
+                        <a href="/meal" class="text-stone-600 hover:text-stone-900 transition">Analysis</a>
+                        <a href="/rapport" class="text-stone-600 hover:text-stone-900 transition">Reports</a>
+                        <a href="/performance" class="text-stone-900 hover:text-stone-600 transition">Performance</a>
+                        <% if (user) { %>
+                        <a href="/profile" class="text-stone-600 hover:text-stone-900 transition">Profile</a>
+                        <% } %>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="mb-12">
+            <h1 class="text-4xl font-serif font-bold text-stone-900 mb-4">Athlete Performance</h1>
+            <p class="text-lg text-stone-600">Track your nutritional progression compared to performance metrics</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="bg-white border border-stone-200 rounded-lg p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-2">Analysis Period</label>
+                    <select id="periodSelect" class="border border-stone-300 rounded-md px-4 py-2 text-stone-900 focus:outline-none focus:ring-2 focus:ring-stone-400">
+                        <option value="7" <%= selectedPeriod === 7 ? 'selected' : '' %>>Last 7 Days</option>
+                        <option value="14" <%= selectedPeriod === 14 ? 'selected' : '' %>>Last 14 Days</option>
+                        <option value="30" <%= selectedPeriod === 30 ? 'selected' : '' %>>Last 30 Days</option>
+                        <option value="60" <%= selectedPeriod === 60 ? 'selected' : '' %>>Last 60 Days</option>
+                    </select>
+                </div>
+                <div class="flex gap-4">
+                    <button onclick="showAddPerformanceModal()" class="bg-stone-900 text-white px-6 py-2 rounded-md hover:bg-stone-800 transition-colors">
+                        Add Performance
+                    </button>
+                    <button class="border border-stone-300 text-stone-700 px-6 py-2 rounded-md hover:bg-stone-50 transition-colors">
+                        Export Data
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Summary -->
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Performance Summary</h2>
+                
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="text-center">
+                        <p class="text-3xl font-serif font-bold text-stone-900">
+                            <%= performanceData.summary.totalWorkouts %>
+                        </p>
+                        <p class="text-sm text-stone-600 mt-1">Total Workouts</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-serif font-bold text-stone-900">
+                            <%= performanceData.summary.avgPerformance %>%
+                        </p>
+                        <p class="text-sm text-stone-600 mt-1">Avg Performance</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-serif font-bold text-stone-900">
+                            <%= performanceData.summary.avgNutrition %>%
+                        </p>
+                        <p class="text-sm text-stone-600 mt-1">Avg Nutrition</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-3xl font-serif font-bold text-stone-900">
+                            +<%= performanceData.summary.improvementRate %>%
+                        </p>
+                        <p class="text-sm text-stone-600 mt-1">Improvement</p>
+                    </div>
+                </div>
+
+                <!-- Correlation Score -->
+                <div class="border border-stone-200 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-stone-900 mb-4">Nutrition-Performance Correlation</h3>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-1">
+                            <div class="w-full bg-stone-200 rounded-full h-4">
+                                <div class="bg-green-500 h-4 rounded-full" style="width: <%= Math.abs(performanceData.correlation) %>%"></div>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-serif font-bold text-stone-900">
+                            <%= performanceData.correlation > 0 ? '+' : '' %><%= performanceData.correlation %>%
+                        </div>
+                    </div>
+                    <p class="text-sm text-stone-600 mt-2">
+                        <% if (performanceData.correlation > 70) { %>
+                            Strong positive correlation between nutrition and performance
+                        <% } else if (performanceData.correlation > 40) { %>
+                            Moderate correlation between nutrition and performance
+                        <% } else { %>
+                            Weak correlation - consider optimizing nutrition timing
+                        <% } %>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Performance vs Nutrition Chart -->
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Performance vs Nutrition Progression</h2>
+                
+                <div class="h-96 mb-6">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                
+                <div class="flex items-center justify-center gap-8">
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-0.5 bg-blue-500"></div>
+                        <span class="text-sm text-stone-600">Performance Score</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <div class="w-4 h-0.5 bg-green-500"></div>
+                        <span class="text-sm text-stone-600">Nutrition Score</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Training Analysis -->
+        <section class="mb-12">
+            <div class="bg-white border border-stone-200 rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold text-stone-900 mb-6">Training Analysis</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Training Type Distribution</h3>
+                        <div class="h-64">
+                            <canvas id="trainingTypeChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="border border-stone-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-stone-900 mb-4">Intensity Levels</h3>
+                        <div class="space-y-4">
+                            <% 
+                            const intensityCounts = {high: 0, moderate: 0, low: 0};
+                            performanceData.chartData.intensities.forEach(intensity => {
+                                intensityCounts[intensity]++;
+                            });
+                            const total = performanceData.chartData.intensities.length;
+                            %>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">High Intensity</span>
+                                    <span class="text-stone-900 font-medium"><%= Math.round((intensityCounts.high / total) * 100) %>%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-red-500 h-3 rounded-full" style="width: <%= (intensityCounts.high / total) * 100 %>%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Moderate Intensity</span>
+                                    <span class="text-stone-900 font-medium"><%= Math.round((intensityCounts.moderate / total) * 100) %>%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-yellow-500 h-3 rounded-full" style="width: <%= (intensityCounts.moderate / total) * 100 %>%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-stone-600">Low Intensity</span>
+                                    <span class="text-stone-900 font-medium"><%= Math.round((intensityCounts.low / total) * 100) %>%</span>
+                                </div>
+                                <div class="w-full bg-stone-200 rounded-full h-3">
+                                    <div class="bg-green-500 h-3 rounded-full" style="width: <%= (intensityCounts.low / total) * 100 %>%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recommendations -->
+        <section>
+            <div class="bg-stone-900 text-white rounded-lg p-8">
+                <h2 class="text-2xl font-serif font-semibold mb-4">Performance Insights</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">📈</div>
+                        <h3 class="font-semibold mb-2">Trend Analysis</h3>
+                        <p class="text-stone-300 text-sm">
+                            <% if (performanceData.trends.performanceImprovement > 0) { %>
+                                Your performance improved by <%= performanceData.trends.performanceImprovement %>% over the analysis period.
+                            <% } else { %>
+                                Focus on consistency to improve your performance trends.
+                            <% } %>
+                        </p>
+                    </div>
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">🥗</div>
+                        <h3 class="font-semibold mb-2">Nutrition Impact</h3>
+                        <p class="text-stone-300 text-sm">
+                            <% if (performanceData.correlation > 50) { %>
+                                Strong correlation shows nutrition significantly impacts your performance.
+                            <% } else { %>
+                                Consider optimizing meal timing and macronutrient balance.
+                            <% } %>
+                        </p>
+                    </div>
+                    <div class="border border-stone-700 rounded-lg p-6">
+                        <div class="text-3xl mb-3">🎯</div>
+                        <h3 class="font-semibold mb-2">Next Steps</h3>
+                        <p class="text-stone-300 text-sm">
+                            <% if (performanceData.summary.bestPerformance < 85) { %>
+                                Focus on pre-workout nutrition to reach peak performance levels.
+                            <% } else { %>
+                                Maintain current nutrition strategy for consistent high performance.
+                            <% } %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Performance Modal -->
+    <div id="addPerformanceModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4">
+            <h3 class="text-xl font-serif font-semibold text-stone-900 mb-6">Add Performance Entry</h3>
+            <form id="addPerformanceForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Date</label>
+                    <input type="date" name="date" required class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Performance Score (0-100)</label>
+                    <input type="number" name="score" min="0" max="100" required class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Training Type</label>
+                    <select name="trainingType" required class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400">
+                        <option value="">Select type</option>
+                        <option value="strength">Strength</option>
+                        <option value="endurance">Endurance</option>
+                        <option value="mixed">Mixed</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Duration (minutes)</label>
+                    <input type="number" name="duration" min="1" required class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Intensity</label>
+                    <select name="intensity" required class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400">
+                        <option value="">Select intensity</option>
+                        <option value="low">Low</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-stone-700 mb-1">Notes (optional)</label>
+                    <textarea name="notes" rows="3" class="w-full px-3 py-2 border border-stone-300 rounded-md focus:outline-none focus:ring-2 focus:ring-stone-400"></textarea>
+                </div>
+                <div class="flex gap-4 pt-4">
+                    <button type="submit" class="flex-1 bg-stone-900 text-white py-2 rounded-md hover:bg-stone-800 transition-colors">
+                        Add Entry
+                    </button>
+                    <button type="button" onclick="hideAddPerformanceModal()" class="flex-1 border border-stone-300 text-stone-700 py-2 rounded-md hover:bg-stone-50 transition-colors">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Chart data from server
+        const chartData = <%- JSON.stringify(performanceData.chartData) %>;
+        
+        // Performance vs Nutrition Chart
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartData.dates,
+                datasets: [{
+                    label: 'Performance Score',
+                    data: chartData.performance,
+                    borderColor: 'rgb(59, 130, 246)',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    tension: 0.4
+                }, {
+                    label: 'Nutrition Score',
+                    data: chartData.nutrition,
+                    borderColor: 'rgb(34, 197, 94)',
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // Training Type Chart
+        const trainingTypes = chartData.trainingTypes;
+        const typeCounts = {};
+        trainingTypes.forEach(type => {
+            typeCounts[type] = (typeCounts[type] || 0) + 1;
+        });
+
+        const ctx2 = document.getElementById('trainingTypeChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'doughnut',
+            data: {
+                labels: Object.keys(typeCounts),
+                datasets: [{
+                    data: Object.values(typeCounts),
+                    backgroundColor: ['#ef4444', '#f59e0b', '#10b981']
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+
+        // Modal functions
+        function showAddPerformanceModal() {
+            document.getElementById('addPerformanceModal').classList.remove('hidden');
+            document.getElementById('addPerformanceModal').classList.add('flex');
+        }
+
+        function hideAddPerformanceModal() {
+            document.getElementById('addPerformanceModal').classList.add('hidden');
+            document.getElementById('addPerformanceModal').classList.remove('flex');
+        }
+
+        // Form submission
+        document.getElementById('addPerformanceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/performance/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    hideAddPerformanceModal();
+                    location.reload(); // Refresh to show new data
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error adding performance data');
+            }
+        });
+
+        // Period selection
+        document.getElementById('periodSelect').addEventListener('change', (e) => {
+            window.location.href = `/performance?days=${e.target.value}`;
+        });
+    </script>
+</body>
+</html>
