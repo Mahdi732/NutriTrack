@@ -1,9 +1,9 @@
 import pool from "../db/db.js";
 
-export const createUser = async (email, hashedPassword, name) => {
+export const createUser = async (email, hashedPassword, full_name) => {
   const [result] = await pool.execute(
     "INSERT INTO users (email, password, full_name) VALUES (?, ?, ?)",
-    [email, hashedPassword, name]
+    [email, hashedPassword, full_name]
   );
   return result.insertId;
 };
@@ -18,7 +18,7 @@ export const findUserByEmail = async (email) => {
 
 export const findUserById = async (id) => {
   const [rows] = await pool.execute(
-    "SELECT id, email, name FROM users WHERE id = ?",
+    "SELECT id, email, full_name FROM users WHERE id = ?",
     [id]
   );
   return rows[0];

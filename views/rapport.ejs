@@ -70,22 +70,70 @@
                             <div>
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-stone-600">Salt Intake</span>
-                                    <span class="text-stone-900 font-medium">2.8g / 2.3g daily limit</span>
+                                    <span class="text-stone-900 font-medium">
+                                        <% if (typeof medicalData !== 'undefined' && medicalData.saltSugar) { %>
+                                            <%= medicalData.saltSugar.currentSalt.toFixed(1) %>g / <%= medicalData.saltSugar.saltLimit %>g daily limit
+                                        <% } else { %>
+                                            2.8g / 2.3g daily limit
+                                        <% } %>
+                                    </span>
                                 </div>
                                 <div class="w-full bg-stone-200 rounded-full h-3">
-                                    <div class="bg-stone-600 h-3 rounded-full" style="width: 122%"></div>
+                                    <% 
+                                    let saltPercentage = 122;
+                                    let saltColor = 'bg-stone-600';
+                                    if (typeof medicalData !== 'undefined' && medicalData.saltSugar) {
+                                        saltPercentage = Math.min(150, (medicalData.saltSugar.currentSalt / medicalData.saltSugar.saltLimit) * 100);
+                                        saltColor = saltPercentage > 100 ? 'bg-red-500' : 'bg-stone-600';
+                                    }
+                                    %>
+                                    <div class="<%= saltColor %> h-3 rounded-full" style="width: <%= saltPercentage.toFixed(0) %>%"></div>
                                 </div>
-                                <p class="text-xs text-stone-500 mt-1">22% over recommended limit</p>
+                                <p class="text-xs text-stone-500 mt-1">
+                                    <% if (typeof medicalData !== 'undefined' && medicalData.saltSugar) { %>
+                                        <% if (medicalData.saltSugar.saltExcess > 0) { %>
+                                            <%= ((medicalData.saltSugar.saltExcess / medicalData.saltSugar.saltLimit) * 100).toFixed(0) %>% over recommended limit
+                                        <% } else { %>
+                                            Within recommended range
+                                        <% } %>
+                                    <% } else { %>
+                                        22% over recommended limit
+                                    <% } %>
+                                </p>
                             </div>
                             <div>
                                 <div class="flex justify-between text-sm mb-2">
                                     <span class="text-stone-600">Sugar Intake</span>
-                                    <span class="text-stone-900 font-medium">38g / 50g daily limit</span>
+                                    <span class="text-stone-900 font-medium">
+                                        <% if (typeof medicalData !== 'undefined' && medicalData.saltSugar) { %>
+                                            <%= medicalData.saltSugar.currentSugar.toFixed(1) %>g / <%= medicalData.saltSugar.sugarLimit %>g daily limit
+                                        <% } else { %>
+                                            38g / 50g daily limit
+                                        <% } %>
+                                    </span>
                                 </div>
                                 <div class="w-full bg-stone-200 rounded-full h-3">
-                                    <div class="bg-stone-400 h-3 rounded-full" style="width: 76%"></div>
+                                    <% 
+                                    let sugarPercentage = 76;
+                                    let sugarColor = 'bg-stone-400';
+                                    if (typeof medicalData !== 'undefined' && medicalData.saltSugar) {
+                                        sugarPercentage = Math.min(150, (medicalData.saltSugar.currentSugar / medicalData.saltSugar.sugarLimit) * 100);
+                                        sugarColor = sugarPercentage > 100 ? 'bg-red-400' : 'bg-stone-400';
+                                    }
+                                    %>
+                                    <div class="<%= sugarColor %> h-3 rounded-full" style="width: <%= sugarPercentage.toFixed(0) %>%"></div>
                                 </div>
-                                <p class="text-xs text-stone-500 mt-1">Within recommended range</p>
+                                <p class="text-xs text-stone-500 mt-1">
+                                    <% if (typeof medicalData !== 'undefined' && medicalData.saltSugar) { %>
+                                        <% if (medicalData.saltSugar.sugarExcess > 0) { %>
+                                            <%= ((medicalData.saltSugar.sugarExcess / medicalData.saltSugar.sugarLimit) * 100).toFixed(0) %>% over recommended limit
+                                        <% } else { %>
+                                            Within recommended range
+                                        <% } %>
+                                    <% } else { %>
+                                        Within recommended range
+                                    <% } %>
+                                </p>
                             </div>
                         </div>
                         
@@ -117,15 +165,33 @@
                         <div class="space-y-4">
                             <div class="grid grid-cols-3 gap-4 text-center">
                                 <div class="border border-stone-200 rounded-lg p-3">
-                                    <p class="text-2xl font-serif font-semibold text-stone-900">94</p>
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">
+                                        <% if (typeof medicalData !== 'undefined' && medicalData.glycemic) { %>
+                                            <%= medicalData.glycemic.average %>
+                                        <% } else { %>
+                                            94
+                                        <% } %>
+                                    </p>
                                     <p class="text-xs text-stone-600 mt-1">Average mg/dL</p>
                                 </div>
                                 <div class="border border-stone-200 rounded-lg p-3">
-                                    <p class="text-2xl font-serif font-semibold text-stone-900">78</p>
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">
+                                        <% if (typeof medicalData !== 'undefined' && medicalData.glycemic) { %>
+                                            <%= medicalData.glycemic.lowest %>
+                                        <% } else { %>
+                                            78
+                                        <% } %>
+                                    </p>
                                     <p class="text-xs text-stone-600 mt-1">Lowest</p>
                                 </div>
                                 <div class="border border-stone-200 rounded-lg p-3">
-                                    <p class="text-2xl font-serif font-semibold text-stone-900">128</p>
+                                    <p class="text-2xl font-serif font-semibold text-stone-900">
+                                        <% if (typeof medicalData !== 'undefined' && medicalData.glycemic) { %>
+                                            <%= medicalData.glycemic.highest %>
+                                        <% } else { %>
+                                            128
+                                        <% } %>
+                                    </p>
                                     <p class="text-xs text-stone-600 mt-1">Highest</p>
                                 </div>
                             </div>
@@ -397,7 +463,13 @@
                     <div class="border border-stone-700 rounded-lg p-6">
                         <div class="text-3xl mb-3">💡</div>
                         <h3 class="font-semibold mb-2">Recommendation</h3>
-                        <p class="text-stone-300 text-sm">Consider reducing salt intake by 15% to stay within recommended limits.</p>
+                        <p class="text-stone-300 text-sm">
+                            <% if (typeof medicalData !== 'undefined' && medicalData.recommendations && medicalData.recommendations.length > 0) { %>
+                                <%= medicalData.recommendations[0].message %>
+                            <% } else { %>
+                                Consider reducing salt intake by 15% to stay within recommended limits.
+                            <% } %>
+                        </p>
                     </div>
                 </div>
             </div>

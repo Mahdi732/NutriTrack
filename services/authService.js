@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { createUser, findUserByEmail } from "../repositories/userRepository.js";
 
-export const registerUser = async (email, password, name) => {
+export const registerUser = async (email, password, full_name) => {
   // Check if user already exists
   const existingUser = await findUserByEmail(email);
   if (existingUser) {
@@ -12,7 +12,7 @@ export const registerUser = async (email, password, name) => {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // Create user
-  const userId = await createUser(email, hashedPassword, name);
+  const userId = await createUser(email, hashedPassword, full_name);
   return userId;
 };
 
@@ -29,5 +29,5 @@ export const loginUser = async (email, password) => {
     throw new Error("Invalid credentials");
   }
 
-  return { id: user.id, email: user.email, name: user.name };
+  return { id: user.id, email: user.email, full_name: user.full_name };
 };

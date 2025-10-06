@@ -10,13 +10,13 @@ export const showRegister = (req, res) => {
 
 export const register = async (req, res) => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, full_name } = req.body;
 
-    if (!email || !password || !name) {
+    if (!email || !password || !full_name) {
       return res.render("auth/register", { error: "All fields are required" });
     }
 
-    await registerUser(email, password, name);
+    await registerUser(email, password, full_name);
     res.redirect("/auth/login");
   } catch (error) {
     res.render("auth/register", { error: error.message });
